@@ -7,6 +7,7 @@ export type Project = {
   layout: "wide-left" | "narrow-right" | "wide-full";
   gradient: string;
   href?: string;
+  caseStudyHref?: string;
 };
 
 export const projects: Project[] = [
@@ -30,6 +31,7 @@ export const projects: Project[] = [
     tags: ["Next.js", "React", "TypeScript", "Tailwind"],
     layout: "narrow-right",
     gradient: "from-[#35524A] via-[#57C785] to-[#BCF4DE]",
+    caseStudyHref: "/work/musicone",
   },
   {
     id: "glazure-cubak",

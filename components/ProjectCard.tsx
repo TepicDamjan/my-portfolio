@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Project } from "@/lib/projects";
 import { Reveal } from "@/components/Reveal";
 
@@ -13,23 +14,13 @@ const layoutClasses: Record<Project["layout"], string> = {
 };
 
 export function ProjectCard({ project, delay = 0 }: ProjectCardProps) {
-  const linkHref = project.href ?? `#${project.id}`;
   const isExternal = Boolean(project.href);
+  const isCaseStudy = Boolean(project.caseStudyHref);
+  const cardClassName =
+    "group block overflow-hidden rounded-lg border border-outline-variant/30 hover-lift";
 
-  return (
-    <Reveal
-      variant="scale-up"
-      delay={delay}
-      className={layoutClasses[project.layout]}
-    >
-      <article className="group/card">
-        <a
-          href={linkHref}
-          {...(isExternal
-            ? { target: "_blank", rel: "noopener noreferrer" }
-            : {})}
-          className="group block overflow-hidden rounded-lg border border-outline-variant/30 hover-lift"
-        >
+  const cardVisual = (
+    <>
           <div
             className={`relative aspect-[4/3] bg-gradient-to-br sm:aspect-[16/10] ${project.gradient} overflow-hidden`}
           >
@@ -54,7 +45,34 @@ export function ProjectCard({ project, delay = 0 }: ProjectCardProps) {
               </span>
             </div>
           </div>
-        </a>
+    </>
+  );
+
+  return (
+    <Reveal
+      variant="scale-up"
+      delay={delay}
+      className={layoutClasses[project.layout]}
+    >
+      <article className="group/card">
+        {isCaseStudy ? (
+          <Link href={project.caseStudyHref!} className={cardClassName}>
+            {cardVisual}
+          </Link>
+        ) : isExternal ? (
+          <a
+            href={project.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cardClassName}
+          >
+            {cardVisual}
+          </a>
+        ) : (
+          <a href={`#${project.id}`} className={cardClassName}>
+            {cardVisual}
+          </a>
+        )}
 
         <div className="mt-4 flex flex-col gap-3 sm:mt-6 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
           <div className="min-w-0 flex-1">

@@ -35,7 +35,7 @@ export function Header() {
       <header className="sticky top-0 z-50 border-b border-outline-variant/30 bg-surface/80 backdrop-blur-md reveal-load-header">
         <div className="container-page flex items-center justify-between gap-4 py-4 sm:py-5 lg:py-6">
           <a
-            href="#"
+            href="/"
             className="text-label-caps shrink-0 font-mono tracking-widest text-on-surface"
           >
             Damjan Tepic
