@@ -5,6 +5,7 @@ type ButtonProps = {
   variant?: "primary" | "secondary";
   children: React.ReactNode;
   className?: string;
+  onClick?: () => void;
 };
 
 export function Button({
@@ -12,9 +13,10 @@ export function Button({
   variant = "primary",
   children,
   className = "",
+  onClick,
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center px-6 py-3 text-label-caps transition-colors duration-200 rounded";
+    "inline-flex min-h-11 items-center justify-center px-5 py-2.5 sm:px-6 sm:py-3 text-label-caps transition-colors duration-200 rounded";
 
   const variants = {
     primary: "bg-primary text-on-primary hover:bg-primary-container",
@@ -23,7 +25,11 @@ export function Button({
   };
 
   return (
-    <Link href={href} className={`${base} ${variants[variant]} ${className}`}>
+    <Link
+      href={href}
+      className={`${base} ${variants[variant]} ${className}`}
+      onClick={onClick}
+    >
       {children}
     </Link>
   );

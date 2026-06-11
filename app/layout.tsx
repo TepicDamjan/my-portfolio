@@ -23,6 +23,12 @@ export const metadata: Metadata = {
     "Building performant, thoughtful digital experiences. Selected work in fintech, e-commerce, and visual identity.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{

@@ -15,6 +15,25 @@
   --surface-tint: #4a6450;
   --tertiary-container: #193413;
   --inverse-surface: #303030;
+
+  --spacing-section: 3rem;
+  --spacing-gutter: 1.5rem;
+  --spacing-margin-mobile: 1rem;
+  --spacing-margin-tablet: 2rem;
+  --spacing-margin-desktop: 4rem;
+  --spacing-content: 45rem;
+}
+
+@media (width >= 768px) {
+  :root {
+    --spacing-section: 4rem;
+  }
+}
+
+@media (width >= 1024px) {
+  :root {
+    --spacing-section: 5rem;
+  }
 }
 
 @theme inline {
@@ -37,21 +56,19 @@
   --font-sans: var(--font-hanken);
   --font-mono: var(--font-jetbrains);
 
-  --spacing-section: 5rem;
-  --spacing-gutter: 1.5rem;
-  --spacing-margin-desktop: 4rem;
-  --spacing-margin-mobile: 1rem;
   --spacing-content: 45rem;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--surface);
   color: var(--on-surface);
   font-family: var(--font-hanken), system-ui, sans-serif;
+  overflow-x: hidden;
 }
 
 @utility text-display-lg {
@@ -69,7 +86,7 @@ body {
 
 @utility text-hero {
   font-family: var(--font-source-serif), Georgia, serif;
-  font-size: clamp(2.75rem, 9vw, 5.5rem);
+  font-size: clamp(2.25rem, 11vw, 5.5rem);
   font-weight: 700;
   line-height: 0.95;
   letter-spacing: -0.02em;
@@ -77,23 +94,28 @@ body {
 
 @utility text-headline-md {
   font-family: var(--font-source-serif), Georgia, serif;
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 5vw, 2rem);
   font-weight: 600;
-  line-height: 2.5rem;
+  line-height: 1.2;
 }
 
 @utility text-headline-sm {
   font-family: var(--font-source-serif), Georgia, serif;
-  font-size: 1.5rem;
+  font-size: clamp(1.125rem, 3.5vw, 1.5rem);
   font-weight: 600;
-  line-height: 2rem;
+  line-height: 1.35;
 }
 
 @utility text-body-lg {
   font-family: var(--font-hanken), system-ui, sans-serif;
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 1.75rem;
+  line-height: 1.625;
+
+  @media (width >= 768px) {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
 }
 
 @utility text-body-md {
@@ -116,10 +138,17 @@ body {
   width: 100%;
   max-width: 90rem;
   margin-inline: auto;
-  padding-inline: var(--spacing-margin-mobile);
+  padding-inline: max(var(--spacing-margin-mobile), env(safe-area-inset-left, 0px))
+    max(var(--spacing-margin-mobile), env(safe-area-inset-right, 0px));
 
-  @media (width >= 768px) {
-    padding-inline: var(--spacing-margin-desktop);
+  @media (width >= 640px) {
+    padding-inline: max(var(--spacing-margin-tablet), env(safe-area-inset-left, 0px))
+      max(var(--spacing-margin-tablet), env(safe-area-inset-right, 0px));
+  }
+
+  @media (width >= 1024px) {
+    padding-inline: max(var(--spacing-margin-desktop), env(safe-area-inset-left, 0px))
+      max(var(--spacing-margin-desktop), env(safe-area-inset-right, 0px));
   }
 }
 
@@ -136,9 +165,11 @@ body {
     box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 
-  &:hover {
-    box-shadow: 0 4px 20px rgb(5 30 14 / 5%);
-    transform: translateY(-4px);
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: 0 4px 20px rgb(5 30 14 / 5%);
+      transform: translateY(-4px);
+    }
   }
 }
 
@@ -262,6 +293,26 @@ body {
 
 .group:hover .image-zoom {
   transform: scale(1.04);
+}
+
+@media (hover: none) {
+  .group:hover .image-zoom {
+    transform: none;
+  }
+
+  .project-card-overlay {
+    display: none;
+  }
+}
+
+@media (hover: hover) {
+  .project-card-overlay {
+    opacity: 0;
+  }
+
+  .group:hover .project-card-overlay {
+    opacity: 1;
+  }
 }
 
 /* Nav link underline fill on hover */
