@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/projects";
 import { Reveal } from "@/components/Reveal";
@@ -21,30 +22,54 @@ export function ProjectCard({ project, delay = 0 }: ProjectCardProps) {
 
   const cardVisual = (
     <>
-          <div
-            className={`relative aspect-[4/3] bg-gradient-to-br sm:aspect-[16/10] ${project.gradient} overflow-hidden`}
-          >
-            <div className="image-zoom absolute inset-0">
-              <div className="absolute inset-4 flex flex-col gap-2 opacity-40 sm:inset-8 sm:gap-3">
-                <div className="h-1.5 w-16 rounded bg-white/20 sm:h-2 sm:w-24" />
-                <div className="flex flex-1 gap-2 sm:gap-3">
-                  <div className="w-1/4 rounded bg-white/10" />
-                  <div className="flex-1 rounded bg-white/10" />
-                </div>
-                <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
-                  <div className="h-8 rounded bg-white/10 sm:h-12" />
-                  <div className="h-8 rounded bg-white/10 sm:h-12" />
-                  <div className="h-8 rounded bg-white/10 sm:h-12" />
-                </div>
+      <div
+        className={`relative aspect-[4/3] bg-gradient-to-br sm:aspect-[16/10] ${project.gradient} overflow-hidden`}
+      >
+        <div className="image-zoom absolute inset-0">
+          <div className="absolute inset-4 flex flex-col gap-2 sm:inset-8 sm:gap-3">
+            <div
+              className="h-1.5 w-16 shrink-0 rounded bg-white/20 opacity-40 sm:h-2 sm:w-24"
+              aria-hidden="true"
+            />
+
+            <div className="flex min-h-0 flex-1 gap-2 sm:gap-3">
+              <div
+                className="w-1/4 shrink-0 rounded bg-white/10 opacity-40"
+                aria-hidden="true"
+              />
+
+              <div
+                className={`relative min-h-0 flex-1 overflow-hidden rounded bg-white/10 ${project.image ? "" : "opacity-40"}`}
+              >
+                {project.image && (
+                  <Image
+                    src={project.image}
+                    alt={project.imageAlt ?? project.title}
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 1024px) 80vw, 40vw"
+                  />
+                )}
               </div>
             </div>
 
-            <div className="project-card-overlay absolute inset-0 flex items-center justify-center bg-primary/25 transition-opacity duration-500">
-              <span className="text-label-caps text-on-primary translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
-                {isExternal ? "Visit Project →" : "View Case Study →"}
-              </span>
+            <div
+              className="grid shrink-0 grid-cols-3 gap-1.5 opacity-40 sm:gap-2"
+              aria-hidden="true"
+            >
+              <div className="h-8 rounded bg-white/10 sm:h-12" />
+              <div className="h-8 rounded bg-white/10 sm:h-12" />
+              <div className="h-8 rounded bg-white/10 sm:h-12" />
             </div>
           </div>
+        </div>
+
+        <div className="project-card-overlay absolute inset-0 flex items-center justify-center bg-primary/25 transition-opacity duration-500">
+          <span className="text-label-caps text-on-primary translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
+            {isExternal ? "Visit Project →" : "View Case Study →"}
+          </span>
+        </div>
+      </div>
     </>
   );
 

@@ -6,6 +6,8 @@ export type Project = {
   tags: string[];
   layout: "wide-left" | "narrow-right" | "wide-full";
   gradient: string;
+  image?: string;
+  imageAlt?: string;
   href?: string;
   caseStudyHref?: string;
 };
@@ -20,6 +22,8 @@ export const projects: Project[] = [
     tags: ["Next.js", "Supabase", "TypeScript", "Tailwind"],
     layout: "wide-left",
     gradient: "from-[#05070A] via-[#0c1824] to-[#05070A]",
+    image: "/FakturaOneHero.png",
+    imageAlt: "FakturaOne invoicing dashboard",
     href: "https://fakturaone.app",
   },
   {
@@ -31,6 +35,8 @@ export const projects: Project[] = [
     tags: ["Next.js", "React", "TypeScript", "Tailwind"],
     layout: "narrow-right",
     gradient: "from-[#35524A] via-[#57C785] to-[#BCF4DE]",
+    image: "/MusicOneHero.png",
+    imageAlt: "MusicOne home screen with Spotify and YouTube URL input",
     caseStudyHref: "/work/musicone",
   },
   {
@@ -42,6 +48,8 @@ export const projects: Project[] = [
     tags: ["Next.js", "TypeScript", "Tailwind", "SEO"],
     layout: "wide-full",
     gradient: "from-[#3a3228] via-[#5c5348] to-[#2a2520]",
+    image: "/GlazureCubakHero.png",
+    imageAlt: "Glazure Cubak business website homepage",
     href: "https://glazurecubak.com",
   },
 ];
