@@ -86,9 +86,9 @@ body {
 
 @utility text-hero {
   font-family: var(--font-source-serif), Georgia, serif;
-  font-size: clamp(2.25rem, 11vw, 5.5rem);
+  font-size: clamp(1.875rem, 9vw, 5.5rem);
   font-weight: 700;
-  line-height: 0.95;
+  line-height: 0.98;
   letter-spacing: -0.02em;
 }
 
@@ -347,8 +347,16 @@ body {
 }
 
 .nav-link-mobile::after {
-  bottom: -4px;
+  bottom: -2px;
   height: 2px;
+}
+
+.nav-link-mobile:active::after {
+  transform: scaleX(1);
+}
+
+.nav-link-mobile:active {
+  color: var(--on-surface);
 }
 
 @media (prefers-reduced-motion: reduce) {

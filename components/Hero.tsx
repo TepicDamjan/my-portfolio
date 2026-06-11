@@ -2,17 +2,17 @@ import { HeroShaderBackground } from "@/components/HeroShaderBackground";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden lg:min-h-[90vh]">
+    <section className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden sm:justify-center lg:min-h-[90vh]">
       <HeroShaderBackground />
 
-      <div className="container-page relative z-10 pb-16 pt-8 section-spacing sm:pb-20 sm:pt-12">
-        <div className="grid gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-8 lg:items-end">
+      <div className="container-page relative z-10 w-full pb-10 pt-6 sm:pb-16 sm:pt-12 lg:pb-20">
+        <div className="grid gap-8 sm:gap-12 lg:grid-cols-12 lg:gap-8 lg:items-end">
           <div className="lg:col-span-8">
-            <p className="text-label-caps text-on-surface-variant mb-6 sm:mb-8 md:mb-12 reveal-load reveal-load-delay-1">
+            <p className="text-label-caps text-on-surface-variant mb-5 sm:mb-8 md:mb-12 reveal-load reveal-load-delay-1">
               Selected Work
             </p>
 
-            <h1 className="text-hero text-on-surface mb-6 sm:mb-8 md:mb-10 uppercase">
+            <h1 className="text-hero text-on-surface mb-5 sm:mb-8 md:mb-10 uppercase">
               <span className="block reveal-load reveal-load-delay-2">The</span>
               <span className="block reveal-load reveal-load-delay-2">
                 Architecture
@@ -35,7 +35,7 @@ export function Hero() {
           <div className="hidden lg:flex lg:col-span-4 lg:justify-end lg:pb-2 reveal-load reveal-load-delay-4">
             <a
               href="#work"
-              className="text-on-surface-variant transition-colors hover:text-on-surface animate-scroll-indicator pointer-events-auto"
+              className="pointer-events-auto animate-scroll-indicator text-on-surface-variant transition-colors hover:text-on-surface"
               aria-label="Scroll to work"
             >
               <svg
@@ -55,10 +55,10 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="mt-12 flex justify-center lg:hidden reveal-load reveal-load-delay-4">
+        <div className="mt-8 flex justify-center sm:mt-12 lg:hidden reveal-load reveal-load-delay-4">
           <a
             href="#work"
-            className="text-on-surface-variant transition-colors hover:text-on-surface animate-scroll-indicator pointer-events-auto p-2"
+            className="pointer-events-auto animate-scroll-indicator p-2 text-on-surface-variant transition-colors hover:text-on-surface"
             aria-label="Scroll to work"
           >
             <svg
