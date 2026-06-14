@@ -26,10 +26,10 @@ export function ContactCTA() {
 
         <Reveal delay={200}>
           <a
-            href="damjan.tepic@icloud.com"
+            href="mailto:damjan.tepic@icloud.com"
             className="text-body-md sm:text-body-lg inline-block break-all underline underline-offset-4 decoration-on-primary/40 transition-colors hover:decoration-on-primary"
           >
-            hello@damjantepic.com
+            damjan.tepic@icloud.com
           </a>
         </Reveal>
 
