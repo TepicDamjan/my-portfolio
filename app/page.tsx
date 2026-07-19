@@ -1,3 +1,4 @@
+import { About } from "@/components/About";
 import { ContactCTA } from "@/components/ContactCTA";
 import { Expertise } from "@/components/Expertise";
 import { Footer } from "@/components/Footer";
@@ -13,6 +14,7 @@ export default function Home() {
         <Hero />
         <WorkGrid />
         <Expertise />
+        <About />
         <ContactCTA />
       </main>
       <Footer />

@@ -21,6 +21,7 @@ export const musicOneCaseStudy: CaseStudy = {
     "yt-dlp",
     "Docker",
   ],
+  footerNote: "Personal project — local demo, not publicly deployed.",
   images: {
     hero: {
       src: "/MusicOneHero.png",

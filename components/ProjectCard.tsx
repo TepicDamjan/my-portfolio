@@ -66,7 +66,7 @@ export function ProjectCard({ project, delay = 0 }: ProjectCardProps) {
 
         <div className="project-card-overlay absolute inset-0 flex items-center justify-center bg-primary/25 transition-opacity duration-500">
           <span className="text-label-caps text-on-primary translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
-            {isExternal ? "Visit Project →" : "View Case Study →"}
+            {isCaseStudy ? "View Case Study →" : "Visit Project →"}
           </span>
         </div>
       </div>

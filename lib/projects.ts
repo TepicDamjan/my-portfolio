@@ -25,6 +25,7 @@ export const projects: Project[] = [
     image: "/FakturaOneHero.png",
     imageAlt: "FakturaOne invoicing dashboard",
     href: "https://fakturaone.app",
+    caseStudyHref: "/work/fakturaone",
   },
   {
     id: "musicone",

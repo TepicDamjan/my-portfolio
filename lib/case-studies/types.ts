@@ -34,6 +34,8 @@ export type CaseStudy = {
   gradient: string;
   meta: CaseStudyMeta;
   stack: string[];
+  liveUrl?: string;
+  footerNote?: string;
   images?: {
     hero: CaseStudyImage;
     screens?: CaseStudyImage[];

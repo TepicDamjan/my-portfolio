@@ -3,19 +3,19 @@ import { CaseStudyView } from "@/components/case-study/CaseStudyView";
 import { ContactCTA } from "@/components/ContactCTA";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { musicOneCaseStudy } from "@/lib/case-studies/musicone";
+import { fakturaOneCaseStudy } from "@/lib/case-studies/fakturaone";
 
 export const metadata: Metadata = {
-  title: "MusicOne — Case Study",
-  description: musicOneCaseStudy.tagline,
+  title: "FakturaOne — Case Study",
+  description: fakturaOneCaseStudy.tagline,
 };
 
-export default function MusicOneCaseStudyPage() {
+export default function FakturaOneCaseStudyPage() {
   return (
     <>
       <Header />
       <main>
-        <CaseStudyView study={musicOneCaseStudy} />
+        <CaseStudyView study={fakturaOneCaseStudy} />
         <ContactCTA />
       </main>
       <Footer />

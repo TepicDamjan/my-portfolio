@@ -101,6 +101,10 @@ export function initHeroShader(canvas: HTMLCanvasElement): (() => void) | null {
 
   let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
   let rafId = 0;
+  let running = false;
+  // Keeps shader time continuous across pauses so the animation doesn't jump.
+  let elapsed = 0;
+  let lastFrameAt: number | null = null;
 
   const syncSize = () => {
     const w = canvas.clientWidth || 1280;
@@ -124,10 +128,17 @@ export function initHeroShader(canvas: HTMLCanvasElement): (() => void) | null {
   };
 
   const render = (time: number) => {
+    if (!running) return;
+
+    if (lastFrameAt !== null) {
+      elapsed += time - lastFrameAt;
+    }
+    lastFrameAt = time;
+
     syncSize();
     gl.viewport(0, 0, canvas.width, canvas.height);
 
-    if (uTime) gl.uniform1f(uTime, time * 0.001);
+    if (uTime) gl.uniform1f(uTime, elapsed * 0.001);
     if (uResolution) gl.uniform2f(uResolution, canvas.width, canvas.height);
     if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
 
@@ -135,9 +146,43 @@ export function initHeroShader(canvas: HTMLCanvasElement): (() => void) | null {
     rafId = requestAnimationFrame(render);
   };
 
+  const start = () => {
+    if (running) return;
+    running = true;
+    lastFrameAt = null;
+    rafId = requestAnimationFrame(render);
+  };
+
+  const stop = () => {
+    running = false;
+    cancelAnimationFrame(rafId);
+  };
+
+  let inViewport = true;
+
+  const syncRunning = () => {
+    if (inViewport && !document.hidden) {
+      start();
+    } else {
+      stop();
+    }
+  };
+
+  const handleVisibilityChange = () => syncRunning();
+
+  const intersectionObserver =
+    typeof IntersectionObserver !== "undefined"
+      ? new IntersectionObserver(([entry]) => {
+          inViewport = entry.isIntersecting;
+          syncRunning();
+        })
+      : null;
+
   syncSize();
   window.addEventListener("mousemove", handleMouseMove);
-  rafId = requestAnimationFrame(render);
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+  intersectionObserver?.observe(canvas);
+  start();
 
   const resizeObserver =
     typeof ResizeObserver !== "undefined"
@@ -147,8 +192,10 @@ export function initHeroShader(canvas: HTMLCanvasElement): (() => void) | null {
   resizeObserver?.observe(canvas);
 
   return () => {
-    cancelAnimationFrame(rafId);
+    stop();
     window.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener("visibilitychange", handleVisibilityChange);
+    intersectionObserver?.disconnect();
     resizeObserver?.disconnect();
     gl.deleteProgram(program);
     gl.deleteShader(vertexShader);

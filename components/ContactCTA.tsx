@@ -1,8 +1,9 @@
+import { ContactForm } from "@/components/ContactForm";
 import { Reveal } from "@/components/Reveal";
 
 const socialLinks = [
-  { href: "https://linkedin.com", label: "LinkedIn" },
-  { href: "https://github.com", label: "GitHub" },
+  { href: "https://www.linkedin.com/in/damjan-tepic", label: "LinkedIn" },
+  { href: "https://github.com/TepicDamjan", label: "GitHub" },
 ] as const;
 
 export function ContactCTA() {
@@ -25,12 +26,19 @@ export function ContactCTA() {
         </Reveal>
 
         <Reveal delay={200}>
-          <a
-            href="mailto:damjan.tepic@icloud.com"
-            className="text-body-md sm:text-body-lg inline-block break-all underline underline-offset-4 decoration-on-primary/40 transition-colors hover:decoration-on-primary"
-          >
-            damjan.tepic@icloud.com
-          </a>
+          <ContactForm />
+        </Reveal>
+
+        <Reveal delay={250}>
+          <p className="text-body-md mt-8 text-on-primary/70">
+            Or email directly:{" "}
+            <a
+              href="mailto:damjan.tepic@icloud.com"
+              className="break-all text-on-primary underline underline-offset-4 decoration-on-primary/40 transition-colors hover:decoration-on-primary"
+            >
+              damjan.tepic@icloud.com
+            </a>
+          </p>
         </Reveal>
 
         <Reveal delay={300}>

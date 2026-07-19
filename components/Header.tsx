@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
 
 const navLinks = [
@@ -20,11 +20,31 @@ function CloseIcon() {
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const openButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
+
+    if (!menuOpen) {
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }
+
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        openButtonRef.current?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.body.style.overflow = "";
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [menuOpen]);
 
@@ -57,6 +77,7 @@ export function Header() {
           </div>
 
           <button
+            ref={openButtonRef}
             type="button"
             className="flex size-11 shrink-0 flex-col items-center justify-center gap-1.5 lg:hidden"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -88,6 +109,7 @@ export function Header() {
               Damjan Tepic
             </span>
             <button
+              ref={closeButtonRef}
               type="button"
               className="flex size-11 flex-col items-center justify-center gap-1.5"
               aria-label="Close menu"

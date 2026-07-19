@@ -147,7 +147,7 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
               <p className="text-label-caps text-on-surface-variant mb-4">Interface</p>
               <div className="reveal-line mb-8 h-px w-full bg-outline-variant/40" />
               <h2 className="text-headline-md text-on-surface mb-10 max-content">
-                Two screens, end to end
+                The interface, end to end
               </h2>
             </Reveal>
 
@@ -273,9 +273,20 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
       <section className="section-spacing border-t border-outline-variant/30">
         <div className="container-page flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
           <Reveal>
-            <p className="text-body-md text-on-surface-variant">
-              Personal project — local demo, not publicly deployed.
-            </p>
+            {study.liveUrl ? (
+              <a
+                href={study.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-label-caps text-on-surface underline underline-offset-4 decoration-outline-variant transition-colors hover:decoration-on-surface"
+              >
+                Visit live site →
+              </a>
+            ) : (
+              <p className="text-body-md text-on-surface-variant">
+                {study.footerNote ?? "Personal project."}
+              </p>
+            )}
           </Reveal>
           <Reveal delay={80}>
             <Link
